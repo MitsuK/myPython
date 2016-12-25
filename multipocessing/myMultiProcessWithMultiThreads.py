@@ -31,6 +31,24 @@ def aSubProcess(queue, arrayOfRecords):
     myKinesisThread.multiThreading(arrayOfRecords)
     queue.put(0)
 
+def mySubProcess(arrayOfRecords):
+    """
+    This function issues a sub process.
+    The sub process possesses one recordArray 'arrayOfRecords'.
+    Sub process program is defined in "aSubProcess".
+    
+    @param arrayOfRecords: Array of records data.
+    @return None
+    """    
+    queue = mp.Queue()
+    start = time.time()
+    ps = mp.Process(target=aSubProcess, args=(queue, arrayOfRecords)) 
+    ps.start()
+    elapsed = time.time() - start
+    print(("subProcess comsumed: {0}".format(elapsed)) + "\t[sec]")
+    #print queue.get()
+    ps.join()
+
 def myMultiProcesses(delay, arrayOfRecordArrays):
     """
     This function issues number of multiprocess with time interval 'delay'.
