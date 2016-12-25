@@ -1,0 +1,14 @@
+import threading
+
+def hello(args):
+    print args
+
+def test(data):
+    for i in range(0, len(data)):
+        threading.Tread(target=hello, args=(data[i])).start()
+
+if __name__ == "__main__":
+    arr = []
+    for i in range(0,3):
+        arr.append(i)
+    test(arr)
