@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+		<head>
+				<meta charset="utf-8">
+				<title>title</title>
+				<script type="text/javascript" src="lib/p5.min.js"></script>
+				<script type="text/javascript" src="../phraseDots.js"></script>
+		</head>
+		<body>
+				<!--<canvas id="dots"></canvas>-->
+				<div id="dotPane"></div>
+				<button onclick="test()">Click</button>
+				<script type="text/javascript">
+				 //console.log(_data)
+				 p = [
+						 [0,0,1,0,0,0,0,0],
+						 [0,1,1,1,1,1,0,0],
+						 [0,0,1,0,0,0,0,0],
+						 [0,0,1,1,1,1,0,0],
+						 [0,1,1,0,1,0,1,0],
+						 [1,0,1,1,0,0,1,0],
+						 [0,1,1,0,0,1,0,0],
+						 [0,0,0,0,0,0,0,0]
+				 ];
+				 var rectArrays = [];
+				 paneWidth = 426;
+				 paneHeight = 426;
+				 numDotsX = 8;
+				 numDotsY = 8;
+				 dotSize = 40;
+				 /*
+				 paneHeight = 212;
+				 numDotsX = 32;
+				 numDotsY = 16;
+				 dotSize = 10;
+				 */
+				 margin = 5;
+				 function getOffset() {
+						 offsets = {"x": 0, "y": 0};
+						 offsets["x"] = (paneWidth - 2 * margin) / numDotsX;
+						 offsets["y"] = (paneHeight - 2 * margin) / numDotsY;
+						 return offsets;
+				 };
+				 _colorMap = ["#cccc66", "#ffffff"]
+				 offsets = getOffset();
+				 //_cur = p;
+				 _cur = _data[0];
+				 function setup(){
+						 fill(color("#000000"));
+						 console.log(rect(20, 20, 100, 150));
+
+						 createCanvas(paneWidth, paneHeight);
+						 background('#dddddd');
+						 noLoop();
+						 /*
+						 for( j = 0; j < numDotsY; j++) {
+								 rectArrays.push(new Array());
+								 //console.log(p[j]);
+								 for( i = 0; i < numDotsX; i++) {
+										 _tmp = {"x": margin + offsets["x"] * i,
+														 "y": margin + offsets["y"] * j,
+														 "color": (_cur[j][i] == 1) ? _colorMap[1]: _colorMap[0],
+														 //"color":  "#333333",
+														 //"color":  "#cccc66",
+														 "rect": null
+										 };
+										 //console.log(_tmp);
+										 noStroke();
+										 fill(color(_tmp["color"]));
+										 _tmp["rect"] = rect(_tmp["x"], _tmp["y"], dotSize, dotSize);
+										 rectArrays[j].push(_tmp);
+								 };
+						 };
+						 */
+				 };
+				 ///*
+				 function draw() {
+						 for( j = 0; j < numDotsY; j++) {
+								 rectArrays.push(new Array());
+								 //console.log(p[j]);
+								 for( i = 0; i < numDotsX; i++) {
+										 _tmp = {"x": margin + offsets["x"] * i,
+														 "y": margin + offsets["y"] * j,
+														 "color": (_cur[j][i] == 1) ? _colorMap[1]: _colorMap[0],
+														 //"color":  "#333333",
+														 //"color":  "#cccc66",
+														 "rect": null
+										 };
+										 if (_cur[j][i] == 1) {
+												 _cur[j][i] = 0;
+										 } else {
+												 _cur[j][i] = 1;
+										 }
+										 //console.log(_tmp);
+										 noStroke();
+										 fill(color(_tmp["color"]));
+										 _tmp["rect"] = rect(_tmp["x"], _tmp["y"], dotSize, dotSize);
+										 rectArrays[j].push(_tmp);
+								 };
+						 };
+				 };
+				 //*/
+				 function test() {
+						 console.log("OK");
+						 redraw();
+				 };
+		
+				</script>
+		</body>
+</html>
